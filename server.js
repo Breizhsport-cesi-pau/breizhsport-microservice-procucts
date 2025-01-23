@@ -1,10 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const sequelize = require('./src/config/database');
-const { Product, Categories, ProductsCategories } = require('./src/models');
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT;
 
 // Synchronisation de la base de données
 sequelize.sync().then(() => {

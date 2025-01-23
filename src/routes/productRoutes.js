@@ -7,7 +7,7 @@ router.get('/', productController.getAllProducts);
 
 router.get('/latest', productController.getLatest);
 
-router.get('/search', productController.getProductByName);
+
 
 // Récupérer un utilisateur par ID
 router.get('/:id', productController.getProductsById);
@@ -21,9 +21,7 @@ router.put('/:id', productController.updateProduct);
 // Supprimer un utilisateur
 router.delete('/:id', productController.deleteProduct);
 
-router.get('/productsbycategory/:id', productController.getProductsByCategory);
 
-router.get('/getallvariantbyproductid/:id', productController.getVariantsByProduct);
 
 
 
