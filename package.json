@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test:unit": "vitest run",
+    "test:cov": "vitest run --coverage --coverage.reporter lcov"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +17,11 @@
     "mysql2": "^3.11.5",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "3.0.4",
+    "@vitest/ui": "3.0.4",
+    "supertest": "^7.0.0",
+    "vitest": "^3.0.4"
   }
 }
