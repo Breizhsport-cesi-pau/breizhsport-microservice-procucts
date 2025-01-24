@@ -1,0 +1,38 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI/CD Dev
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  quality_tests:
+    # needs: [unit_and_integration_tests, e2e_tests]
+    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/test.quality.yml@develop
+    secrets:
+      SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    with:
+      coverage_folder: ./coverage
+      coverage_artifact_name: coverage
+  publish_to_docker_push_event:
+    needs: [quality_tests]
+    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
+    secrets:
+      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-front:develop
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
+    if: github.event_name != 'pull_request'
+  publish_to_docker_pr_event:
+    needs: [quality_tests]
+    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
+    secrets:
+      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-front:develop-pr-${{ github.event.number }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
+    if: github.event_name == 'pull_request'

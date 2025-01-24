@@ -1,7 +1,11 @@
-FROM node:16
-WORKDIR /usr/src/app
-COPY package*.json ./
-COPY . .
+FROM node:20-alpine
+
+ADD . /app
+WORKDIR /app
+
 RUN npm install
-EXPOSE 3001
+
+EXPOSE 3002
+
+USER node
 CMD ["node", "server.js"]
