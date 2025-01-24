@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
+const Global = require('../utils/helpers')
 
 // Récupérer tous les utilisateurs
 router.get('/', productController.getAllProducts);
@@ -13,13 +14,13 @@ router.get('/latest', productController.getLatest);
 router.get('/:id', productController.getProductsById);
 
 // Créer un nouvel utilisateur
-router.post('/', productController.createProduct);
+router.post('/', Global.authenticateToken, productController.createProduct);
 
 // Modifier un utilisateur
-router.put('/:id', productController.updateProduct);
+router.put('/:id', Global.authenticateToken, productController.updateProduct);
 
 // Supprimer un utilisateur
-router.delete('/:id', productController.deleteProduct);
+router.delete('/:id', Global.authenticateToken, productController.deleteProduct);
 
 
 

@@ -8,14 +8,33 @@
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
 services:
+  bdd-build:
+    container_name: bdd_build
+    image: mariadb:latest
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: bddname
+      MYSQL_USER: roger
+      MYSQL_PASSWORD: regor
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
   server:
     build:
       context: .
+    depends_on:
+      bdd-build:
+        condition: service_healthy
     environment:
       NODE_ENV: production
+      BDD_HOST: bdd-build
     ports:
       - 3002:3002
-
 # The commented out section below is an example of how to define a PostgreSQL
 # database that your application can use. `depends_on` tells Docker Compose to
 # start the database before your application. The `db-data` volume persists the

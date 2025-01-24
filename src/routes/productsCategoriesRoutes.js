@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const productsCategoriesController = require('../controllers/productsCategoriesController');
+const Global = require('../utils/helpers')
 
 // Récupérer toutes les relations produits-catégories
 router.get('/', productsCategoriesController.getAllProductsCategories);
@@ -10,12 +11,12 @@ router.get('/', productsCategoriesController.getAllProductsCategories);
 router.get('/:id', productsCategoriesController.getProductCategoryById);
 
 // Créer une nouvelle relation produit-catégorie
-router.post('/', productsCategoriesController.createProductCategory);
+router.post('/', Global.authenticateToken, productsCategoriesController.createProductCategory);
 
 // Mettre à jour une relation produit-catégorie
-router.put('/:id', productsCategoriesController.updateProductCategory);
+router.put('/:id', Global.authenticateToken, productsCategoriesController.updateProductCategory);
 
 // Supprimer une relation produit-catégorie
-router.delete('/:id', productsCategoriesController.deleteProductCategory);
+router.delete('/:id', Global.authenticateToken, productsCategoriesController.deleteProductCategory);
 
 module.exports = router;
