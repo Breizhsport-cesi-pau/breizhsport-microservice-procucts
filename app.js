@@ -11,6 +11,9 @@ const categorieRoutes = require('./src/routes/categorieRoute');
 const productsCategoriesRoutes = require('./src/routes/productsCategoriesRoutes');
 const pictureRoute = require('./src/routes/picturesRoute');
 
+app.get('/healthcheck', (req, res) => {
+    res.status(200).send('ok');
+});
 app.use('/categories', categorieRoutes);
 app.use('/variants', variantRoutes);
 app.use('/products', productRoutes);
