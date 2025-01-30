@@ -31,7 +31,7 @@ jobs:
     needs: [quality_tests, unit_and_integration_tests]
     uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
     secrets:
-      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-front:develop
+      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-product-service:develop
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
     if: github.event_name != 'pull_request'
@@ -39,7 +39,7 @@ jobs:
     needs: [quality_tests, unit_and_integration_tests]
     uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
     secrets:
-      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-front:develop-pr-${{ github.event.number }}
+      tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-product-service:develop-pr-${{ github.event.number }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PAT: ${{ secrets.DOCKER_PAT }}
     if: github.event_name == 'pull_request'
