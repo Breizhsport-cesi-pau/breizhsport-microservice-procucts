@@ -16,12 +16,12 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/test.unit-integration.yml@develop
+    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/test.unit-integration.yml@main
     with:
       node-version: ${{ matrix.node-version }}
   quality_tests:
     needs: [unit_and_integration_tests]
-    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/test.quality.yml@develop
+    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/test.quality.yml@main
     secrets:
       SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_TOKEN }}
     with:
@@ -29,7 +29,7 @@ jobs:
       coverage_artifact_name: coverage
   publish_to_docker_push_event:
     needs: [quality_tests, unit_and_integration_tests]
-    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
+    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/publish.docker.yml@main
     secrets:
       tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-product-service:develop
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -37,7 +37,7 @@ jobs:
     if: github.event_name != 'pull_request'
   publish_to_docker_pr_event:
     needs: [quality_tests, unit_and_integration_tests]
-    uses: Breizhsport-cesi-pau/breizhsport-front/.github/workflows/publish.docker.yml@develop
+    uses: Breizhsport-cesi-pau/breizhsport-infra/.github/workflows/publish.docker.yml@main
     secrets:
       tags: ${{ secrets.DOCKER_USERNAME }}/breizhsport-product-service:develop-pr-${{ github.event.number }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
