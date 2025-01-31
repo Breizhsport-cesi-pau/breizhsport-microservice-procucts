@@ -1,7 +1,7 @@
 // Modèle Variant
 const { DataTypes } = require( 'sequelize' );
 const sequelize = require( '../config/database' );
-const Product = require( './product' );
+const Product = require( './Product' );
 
 const Variant = sequelize.define( 'Variant', {
     id: {

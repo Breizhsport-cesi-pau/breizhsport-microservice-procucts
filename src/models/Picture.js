@@ -1,6 +1,6 @@
 const { DataTypes } = require( 'sequelize' );
 const sequelize = require( '../config/database' );
-const Variant = require( './variant' );
+const Variant = require( './Variant' );
 
 const Picture = sequelize.define( 'Picture', {
     id: {

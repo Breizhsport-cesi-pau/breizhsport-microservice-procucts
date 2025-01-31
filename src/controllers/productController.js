@@ -3,7 +3,7 @@ const GLOBAL = require( "../utils/helpers" );
 const Product = require( '../models/product' );
 const Categories = require( '../models/categorie' );
 const ProductsCategories = require( '../models/productsCategories' );
-const Variant = require( '../models/variant' );
+const Variant = require( '../models/Variant' );
 const Picture = require( '../models/picture' );
 
 

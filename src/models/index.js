@@ -1,9 +1,9 @@
 const sequelize = require( '../config/database' );
-const Product = require( './product' );
-const Categories = require( './categorie' );
-const Variant = require( './variant' );
-const Picture = require( './picture' );
-const ProductsCategories = require( './productsCategories' );
+const Product = require( './Product' );
+const Categories = require( './Categorie' );
+const Variant = require( './Variant' );
+const Picture = require( './Picture' );
+const ProductsCategories = require( './ProductsCategories' );
 
 Product.hasMany( Variant, {
     foreignKey: 'id_product',

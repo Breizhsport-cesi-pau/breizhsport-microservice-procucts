@@ -22,7 +22,7 @@ const Product = sequelize.define( 'Product', {
 } );
 
 // Relation unidirectionnelle : Product → ProductsCategories
-Product.hasMany( require( './productsCategories' ), {
+Product.hasMany( require( './ProductsCategories' ), {
     foreignKey: 'id_product',
     as: 'productCategories',
 } );
