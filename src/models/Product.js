@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require( 'sequelize' );
+const sequelize = require( '../config/database' );
 
-const Product = sequelize.define('Product', {
+const Product = sequelize.define( 'Product', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -19,12 +19,12 @@ const Product = sequelize.define('Product', {
 }, {
     tableName: 'Products',
     timestamps: true,
-});
+} );
 
 // Relation unidirectionnelle : Product → ProductsCategories
-Product.hasMany(require('./ProductsCategories'), {
+Product.hasMany( require( './productsCategories' ), {
     foreignKey: 'id_product',
     as: 'productCategories',
-});
+} );
 
 module.exports = Product;

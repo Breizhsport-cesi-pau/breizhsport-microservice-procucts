@@ -1,8 +1,8 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Variant = require('./Variant');
+const { DataTypes } = require( 'sequelize' );
+const sequelize = require( '../config/database' );
+const Variant = require( './variant' );
 
-const Picture = sequelize.define('Picture', {
+const Picture = sequelize.define( 'Picture', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -10,7 +10,7 @@ const Picture = sequelize.define('Picture', {
         primaryKey: true,
     },
     id_variant: {
-        type: DataTypes.CHAR(36),
+        type: DataTypes.CHAR( 36 ),
         allowNull: false, // Une photo doit toujours être associée à un variant
         references: {
             model: Variant, // Référence au modèle `Variant`
@@ -26,6 +26,6 @@ const Picture = sequelize.define('Picture', {
 }, {
     tableName: 'Pictures',
     timestamps: true,
-});
+} );
 
 module.exports = Picture;

@@ -1,69 +1,69 @@
-const Variant = require('../models/Variant');
-const Product = require('../models/Product');
-const Global = require('../utils/helpers');
+const Variant = require( '../models/variant' );
+const Product = require( '../models/product' );
+const Global = require( '../utils/helpers' );
 
 // Récupérer toutes les variantes
-exports.getAllVariants = async (req, res) => {
+exports.getAllVariants = async ( req, res ) => {
     try {
-        const variants = await Variant.findAll({
-            include: [{
+        const variants = await Variant.findAll( {
+            include: [ {
                 model: Product,
                 as: 'product',
-                attributes: ['id', 'name', 'description'],
-            }],
-        });
+                attributes: [ 'id', 'name', 'description' ],
+            } ],
+        } );
 
-        res.json(variants);
-    } catch (error) {
-        console.error('Erreur lors de la récupération des variants:', error);
-        res.status(500).json({ error: 'Erreur lors de la récupération des variants' });
+        res.json( variants );
+    } catch ( error ) {
+        console.error( 'Erreur lors de la récupération des variants:', error );
+        res.status( 500 ).json( { error: 'Erreur lors de la récupération des variants' } );
     }
 };
 
 // Récupérer une variante par ID
-exports.getVariantsById = async (req, res) => {
+exports.getVariantsById = async ( req, res ) => {
     const { id } = req.params;
     try {
-        const variant = await Variant.findByPk(id, {
-            include: [{
+        const variant = await Variant.findByPk( id, {
+            include: [ {
                 model: Product,
                 as: 'product',
-                attributes: ['id', 'name', 'description'],
-            }],
-        });
+                attributes: [ 'id', 'name', 'description' ],
+            } ],
+        } );
 
-        if (!variant) {
-            return res.status(404).json({ error: 'Variant non trouvé' });
+        if ( !variant ) {
+            return res.status( 404 ).json( { error: 'Variant non trouvé' } );
         }
 
-        res.json(variant);
-    } catch (error) {
-        console.error('Erreur lors de la récupération du variant:', error);
-        res.status(500).json({ error: 'Erreur lors de la récupération du variant' });
+        res.json( variant );
+    } catch ( error ) {
+        console.error( 'Erreur lors de la récupération du variant:', error );
+        res.status( 500 ).json( { error: 'Erreur lors de la récupération du variant' } );
     }
 };
 
 // Créer un nouveau variant
-exports.createVariant = async (req, res) => {
+exports.createVariant = async ( req, res ) => {
     const { id_product, size, color, price, stock, name } = req.body;
     const id = Global.generateGUID();
     try {
-        const newVariant = await Variant.create({ id, id_product, size, color, price, stock, name });
-        res.status(201).json({ message: 'Variant créé', variant: newVariant });
-    } catch (error) {
-        console.error('Erreur lors de la création du variant:', error);
-        res.status(500).json({ error: 'Erreur lors de la création du variant' });
+        const newVariant = await Variant.create( { id, id_product, size, color, price, stock, name } );
+        res.status( 201 ).json( { message: 'Variant créé', variant: newVariant } );
+    } catch ( error ) {
+        console.error( 'Erreur lors de la création du variant:', error );
+        res.status( 500 ).json( { error: 'Erreur lors de la création du variant' } );
     }
 };
 
 // Modifier une variante
-exports.updateVariant = async (req, res) => {
+exports.updateVariant = async ( req, res ) => {
     const { id } = req.params;
     const { name, size, color, price, stock, id_product } = req.body;
     try {
-        const variant = await Variant.findByPk(id);
-        if (!variant) {
-            return res.status(404).json({ error: 'Variant non trouvé' });
+        const variant = await Variant.findByPk( id );
+        if ( !variant ) {
+            return res.status( 404 ).json( { error: 'Variant non trouvé' } );
         }
 
         // Mise à jour des champs
@@ -76,27 +76,27 @@ exports.updateVariant = async (req, res) => {
 
         await variant.save();
 
-        res.json({ message: 'Variant mis à jour', variant });
-    } catch (error) {
-        console.error('Erreur lors de la mise à jour du variant:', error);
-        res.status(500).json({ error: 'Erreur lors de la mise à jour du variant' });
+        res.json( { message: 'Variant mis à jour', variant } );
+    } catch ( error ) {
+        console.error( 'Erreur lors de la mise à jour du variant:', error );
+        res.status( 500 ).json( { error: 'Erreur lors de la mise à jour du variant' } );
     }
 };
 
 // Supprimer une variante
-exports.deleteVariant = async (req, res) => {
+exports.deleteVariant = async ( req, res ) => {
     const { id } = req.params;
     try {
-        const variant = await Variant.findByPk(id);
-        if (!variant) {
-            return res.status(404).json({ error: 'Variant non trouvé' });
+        const variant = await Variant.findByPk( id );
+        if ( !variant ) {
+            return res.status( 404 ).json( { error: 'Variant non trouvé' } );
         }
 
         await variant.destroy();
 
-        res.json({ message: 'Variant supprimé' });
-    } catch (error) {
-        console.error('Erreur lors de la suppression du variant:', error);
-        res.status(500).json({ error: 'Erreur lors de la suppression du variant' });
+        res.json( { message: 'Variant supprimé' } );
+    } catch ( error ) {
+        console.error( 'Erreur lors de la suppression du variant:', error );
+        res.status( 500 ).json( { error: 'Erreur lors de la suppression du variant' } );
     }
 };

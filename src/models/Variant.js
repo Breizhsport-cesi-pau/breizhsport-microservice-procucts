@@ -1,11 +1,11 @@
 // Modèle Variant
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
-const Product = require('./Product');
+const { DataTypes } = require( 'sequelize' );
+const sequelize = require( '../config/database' );
+const Product = require( './product' );
 
-const Variant = sequelize.define('Variant', {
+const Variant = sequelize.define( 'Variant', {
     id: {
-        type: DataTypes.CHAR(36),
+        type: DataTypes.CHAR( 36 ),
         allowNull: false,
         primaryKey: true,
     },
@@ -43,7 +43,7 @@ const Variant = sequelize.define('Variant', {
 }, {
     tableName: 'Variants',
     timestamps: true,
-});
+} );
 
 
 module.exports = Variant;
