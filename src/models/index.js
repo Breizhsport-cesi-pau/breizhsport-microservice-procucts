@@ -1,6 +1,6 @@
 const sequelize = require( '../config/database' );
 const Product = require( './Product' );
-const Categories = require( './categorie' );
+const Categories = require( './Categorie' );
 const Variant = require( './Variant' );
 const Picture = require( './Picture' );
 const ProductsCategories = require( './ProductsCategories' );

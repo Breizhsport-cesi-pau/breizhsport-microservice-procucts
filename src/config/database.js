@@ -6,4 +6,17 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     logging: false,
 });
 
+(async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('✅ Connexion réussie à la base de données.');
+
+        await sequelize.sync({ alter: true }); // Assure la mise à jour des modèles
+        console.log('✅ Modèles synchronisés.');
+
+    } catch (error) {
+        console.error('❌ Erreur lors de l\'initialisation de l\'app :', error);
+    }
+})();
+
 module.exports = sequelize;
