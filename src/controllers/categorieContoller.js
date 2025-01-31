@@ -1,4 +1,4 @@
-const Categorie = require( '../models/categorie' );
+const Categorie = require( '../models/Categorie' );
 
 // Récupérer tous les produits
 exports.getAllCategories = async ( req, res ) => {

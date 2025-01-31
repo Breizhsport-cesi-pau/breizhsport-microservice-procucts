@@ -1,5 +1,5 @@
-const Variant = require( '../models/variant' );
-const Product = require( '../models/product' );
+const Variant = require( '../models/Variant' );
+const Product = require( '../models/Product' );
 const Global = require( '../utils/helpers' );
 
 // Récupérer toutes les variantes

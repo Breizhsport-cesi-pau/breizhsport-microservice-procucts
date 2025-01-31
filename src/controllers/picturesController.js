@@ -1,4 +1,4 @@
-const Picture = require( '../models/picture' );
+const Picture = require( '../models/Picture' );
 
 // Récupérer toutes les photos d'un variant
 exports.getPicturesByVariant = async ( req, res ) => {
