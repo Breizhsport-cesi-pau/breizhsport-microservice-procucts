@@ -2,7 +2,7 @@ const sequelize = require( '../config/database' );
 const Product = require( './product' );
 const Categories = require( './categorie' );
 const Variant = require( './variant' );
-const Picture = require( './Picture' );
+const Picture = require( './picture' );
 const ProductsCategories = require( './productsCategories' );
 
 Product.hasMany( Variant, {

@@ -1,10 +1,10 @@
 const { Op } = require( 'sequelize' );
 const GLOBAL = require( "../utils/helpers" );
 const Product = require( '../models/product' );
-const Categories = require( '../models/Categorie' );
+const Categories = require( '../models/categorie' );
 const ProductsCategories = require( '../models/productsCategories' );
 const Variant = require( '../models/variant' );
-const Picture = require( '../models/Picture' );
+const Picture = require( '../models/picture' );
 
 
 exports.getLatest = async ( req, res ) => {
