@@ -1,7 +1,7 @@
 const { Op } = require( 'sequelize' );
 const GLOBAL = require( "../utils/helpers" );
 const Product = require( '../models/Product' );
-const Categories = require( '../models/Categorie' );
+const Categories = require( '../models/categorie' );
 const ProductsCategories = require( '../models/ProductsCategories' );
 const Variant = require( '../models/Variant' );
 const Picture = require( '../models/Picture' );

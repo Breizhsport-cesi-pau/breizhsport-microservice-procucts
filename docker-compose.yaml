@@ -1,0 +1,49 @@
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+# Here the instructions define your application as a service called "server".
+# This service is built from the Dockerfile in the current directory.
+# You can add other services your application may depend on here, such as a
+# database or a cache. For examples, see the Awesome Compose repository:
+# https://github.com/docker/awesome-compose
+services:
+  db-products:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+
+  ms-products:
+    build: .
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./src
+          target: /usr/src/app/src
+          ignore:
+            - node_modules/
+        - action: sync+restart
+          path: ./server.js
+          target: /usr/src/app/server.js
+        - action: sync+restart
+          path: ./app.js
+          target: /usr/src/app/app.js
+        - action: rebuild
+          path: package.json
+    restart: always
+    depends_on:
+      - db-products
+    environment:
+      DB_NAME: test_db
+      DB_USER: test_user
+      DB_PASSWORD: test_pass
+      DB_HOST: db-products
+      DB_DIALECT: mysql
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./keys/rsa.key.pub:/usr/src/app/keys/rsa.key.pub:ro

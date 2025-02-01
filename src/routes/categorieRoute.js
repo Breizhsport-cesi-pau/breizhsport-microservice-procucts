@@ -1,22 +1,22 @@
-const express = require('express');
+const express = require( 'express' );
 const router = express.Router();
-const categorieController = require('../controllers/categorieContoller');
-const Global = require('../utils/helpers')
+const categorieController = require( '../controllers/categorieContoller' );
+const Global = require( '../utils/helpers' )
 
 // Récupérer tous les utilisateurs
-router.get('/', categorieController.getAllCategories);
+router.get( '/', categorieController.getAllCategories );
 
 // Récupérer un utilisateur par ID
-router.get('/:id', categorieController.getCategoriesById);
+router.get( '/:id', categorieController.getCategoriesById );
 
 // Créer un nouvel utilisateur
-router.post('/', Global.authenticateToken, categorieController.createCategorie);
+router.post( '/', Global.authenticateToken, categorieController.createCategorie );
 
 // Modifier un utilisateur
-router.put('/:id', Global.authenticateToken, categorieController.updateCategorie);
+router.put( '/:id', Global.authenticateToken, categorieController.updateCategorie );
 
 // Supprimer un utilisateur
-router.delete('/:id', Global.authenticateToken, categorieController.deleteCategorie);
+router.delete( '/:id', Global.authenticateToken, categorieController.deleteCategorie );
 
 
 
