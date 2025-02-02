@@ -69,7 +69,9 @@ exports.getAllProducts = async ( req, res ) => {
             limit,
             offset,
         } );
-
+        const count = await Product.count( {
+            where: whereConditions,
+        } )
         if ( !products || products.length === 0 ) {
             return res.status( 404 ).json( { error: 'Aucun produit trouvé' } );
         }
@@ -98,7 +100,7 @@ exports.getAllProducts = async ( req, res ) => {
             } ) ),
         } ) );
 
-        res.json( formattedProducts );
+        res.json( { data: formattedProducts, currentPage: page, numberOfPages: Math.ceil( count / limit ) } );
     } catch ( error ) {
         console.error( 'Erreur lors de la récupération des produits :', error );
         res.status( 500 ).json( { error: 'Erreur lors de la récupération des produits' } );
