@@ -182,6 +182,7 @@ exports.getProductsById = async ( req, res ) => {
 // Créer un nouvel produit
 exports.createProduct = async ( req, res ) => {
     const { name, description, categorys, variants } = req.body;
+    console.dir( req.files, { depth: null } )
     try {
         const newProduct = await Product.create( { name, description } );
 
@@ -205,6 +206,9 @@ exports.createProduct = async ( req, res ) => {
         res.status( 201 ).json( { message: 'Produit créé', product: newProduct } );
     } catch ( error ) {
         console.error( 'Erreur lors de la création du produit :', error );
+        for ( const picture of req.files ) {
+            fs.rm( picture.path )
+        }
         res.status( 500 ).json( { error: 'Erreur lors de la création du produit' } );
     }
 };
