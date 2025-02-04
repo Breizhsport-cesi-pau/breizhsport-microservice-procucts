@@ -16,6 +16,8 @@ services:
       MYSQL_DATABASE: test_db
       MYSQL_USER: test_user
       MYSQL_PASSWORD: test_pass
+    ports:
+      - "4002:3306"
 
   ms-products:
     build: .
@@ -47,3 +49,4 @@ services:
       - "3002:3002"
     volumes:
       - ./keys/rsa.key.pub:/usr/src/app/keys/rsa.key.pub:ro
+      - ./static:/usr/src/app/static:rw

@@ -1,5 +1,4 @@
 require( 'dotenv' ).config();
-const express = require( 'express' );
 const sequelize = require( './src/config/database' );
 const app = require( "./app" );
 

@@ -1,26 +1,27 @@
-const express = require('express');
+const express = require( 'express' );
 const router = express.Router();
-const productController = require('../controllers/productController');
-const Global = require('../utils/helpers')
+const productController = require( '../controllers/productController' );
+const Global = require( '../utils/helpers' );
+const upload = require( '../config/multer' );
 
 // Récupérer tous les utilisateurs
-router.get('/', productController.getAllProducts);
+router.get( '/', productController.getAllProducts );
 
-router.get('/latest', productController.getLatest);
+router.get( '/latest', productController.getLatest );
 
 
 
 // Récupérer un utilisateur par ID
-router.get('/:id', productController.getProductsById);
+router.get( '/:id', productController.getProductsById );
 
 // Créer un nouvel utilisateur
-router.post('/', Global.authenticateToken, productController.createProduct);
+router.post( '/', upload.any(), productController.createProduct );
 
 // Modifier un utilisateur
-router.put('/:id', Global.authenticateToken, productController.updateProduct);
+router.put( '/:id', Global.authenticateToken, productController.updateProduct );
 
 // Supprimer un utilisateur
-router.delete('/:id', Global.authenticateToken, productController.deleteProduct);
+router.delete( '/:id', productController.deleteProduct );
 
 
 
