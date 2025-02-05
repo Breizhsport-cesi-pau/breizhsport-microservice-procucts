@@ -183,6 +183,7 @@ exports.getProductsById = async ( req, res ) => {
 exports.createProduct = async ( req, res ) => {
     const { name, description, categorys, variants } = req.body;
     console.dir( req.files, { depth: null } )
+    console.dir( req.body, { depth: null } )
     try {
         const newProduct = await Product.create( { name, description } );
 
