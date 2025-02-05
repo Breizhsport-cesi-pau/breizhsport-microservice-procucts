@@ -15,7 +15,7 @@ router.get( '/latest', productController.getLatest );
 router.get( '/:id', productController.getProductsById );
 
 // Créer un nouvel utilisateur
-router.post( '/', upload.any(), productController.createProduct );
+router.post( '/', Global.authenticateToken, upload.any(), productController.createProduct );
 
 // Modifier un utilisateur
 router.put( '/:id', Global.authenticateToken, productController.updateProduct );
