@@ -73,7 +73,7 @@ const PORT = process.env.PORT || 3002;
                 await Picture.bulkCreate( [
                     {
                         id_variant: '5c3303ff-d4ac-11ef-977a-5254002b0e17',
-                        url: 'https://th.bing.com/th/id/OIP.KQsOwCJsmvC22edRTRQaPwAAAA?w=156&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7',
+                        url: 'https://www.bing.com/images/search?q=image%20teeshirt&FORM=IQFRBA&id=19BA8C05D9CB408C4A3AD6C177BD758DA1D32838',
                     },
                 ] );
             } else {
